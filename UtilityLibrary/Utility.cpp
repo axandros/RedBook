@@ -10,6 +10,7 @@ using namespace std;
 
 namespace Utility {
 
+	
 	string ShaderUtil::LoadShader(const string& filename) {
 		ifstream stream(filename);
 
@@ -31,7 +32,7 @@ namespace Utility {
 		const char* src = stringSRC.c_str();
 		glShaderSource(id, 1, &src, nullptr);
 		glCompileShader(id);
-
+		
 		int result;
 		glGetShaderiv(id, GL_COMPILE_STATUS, &result);
 		if (result == GL_FALSE) {
@@ -64,6 +65,17 @@ namespace Utility {
 		glAttachShader(program, vs);
 		glAttachShader(program, fs);
 		glLinkProgram(program);
+		int result;
+		glGetProgramiv(program, GL_LINK_STATUS, &result);
+		if (result == GL_FALSE) {
+			GLsizei length;
+			glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length);
+			char* message = (char*)alloca(length * sizeof(char));
+			glGetProgramInfoLog(program, length, &length, message);
+			cout << "Program failed to link." << endl;
+			// TODO: Handl link failure.  How?  That's why this is TODO.
+		}
+
 		glValidateProgram(program);
 		return program;
 	}

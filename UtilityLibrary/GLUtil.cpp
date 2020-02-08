@@ -2,7 +2,7 @@
 
 namespace Utility {
 	size_t GLUtil::TypeSize(GLenum type){
-		size_t size;
+		size_t size = 0;
 		#define CASE(Enum, Count, Type)	\
 		case Enum: size = Count * sizeof(Type); break
 
@@ -35,7 +35,7 @@ namespace Utility {
 			#undef CASE
 			default:
 				fprintf(stderr, "Unknown type: 0x%x\n", type);
-				exit(EXIT_FAILURE);
+				//exit(EXIT_FAILURE);
 				break;
 		}
 
