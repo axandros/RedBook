@@ -1,0 +1,5 @@
+CMake/
+examples/
+src/
+.CmakeLists.txt
+cmake_uninstall.cmake.in
