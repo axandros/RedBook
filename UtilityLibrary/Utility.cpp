@@ -11,7 +11,7 @@ using namespace std;
 namespace Utility {
 
 	
-	string ShaderUtil::LoadShader(const string& filename) {
+	string ShaderUtil::LoadShader(const string& filename, bool debug) {
 		ifstream stream(filename);
 
 		string ret = "";
@@ -20,7 +20,7 @@ namespace Utility {
 			ret += line + '\n';
 		}
 
-		//cout << "[debug] " << ret << endl;
+		if(debug){cout << "[debug] " << ret << endl;}
 
 		return ret;
 	}
@@ -36,8 +36,9 @@ namespace Utility {
 		int result;
 		glGetShaderiv(id, GL_COMPILE_STATUS, &result);
 		if (result == GL_FALSE) {
-			int length;
+			int length=0;
 			glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
+
 			char* message = (char*)alloca(length * sizeof(char));
 			glGetShaderInfoLog(id, length, &length, message);
 
@@ -54,11 +55,22 @@ namespace Utility {
 			glDeleteShader(id);
 			id = 0;
 		}
+		else {
+
+			string shaderTypeString;
+			switch (shaderType) {
+			case GL_VERTEX_SHADER: shaderTypeString = "Vertex";
+				break;
+			case GL_FRAGMENT_SHADER: shaderTypeString = "Fragment";
+				break;
+			}
+			cout << "Compiled " << shaderTypeString << " successfully. " << endl;
+		}
 
 		return id;
 	}
 
-	int ShaderUtil::CreateShader(const string& vertexShader, const string fragmentShader) {
+	int ShaderUtil::CreateShader(const string& vertexShader, const string& fragmentShader) {
 		unsigned int program = glCreateProgram();
 		unsigned int vs = CompileShader(GL_VERTEX_SHADER, vertexShader);
 		unsigned int fs = CompileShader(GL_FRAGMENT_SHADER, fragmentShader);

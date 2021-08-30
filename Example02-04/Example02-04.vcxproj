@@ -145,6 +145,10 @@
       <Project>{f393e472-7d3f-4600-9938-3613520584ea}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="uniform.vert" />
+    <None Include="uniform.frag" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

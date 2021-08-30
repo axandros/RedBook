@@ -54,7 +54,7 @@ void init(void) {
 		exit(EXIT_FAILURE);
 	}
 	else {
-		cout << "Entered Init Else" << endl;
+		cout << "Buffer Allocated." << endl;
 		
 		enum { Translation, Scale, Rotation, Enabled, NumUniforms};
 
@@ -100,34 +100,7 @@ void init(void) {
 		glBufferData(GL_UNIFORM_BUFFER, uboSize, buffer, GL_STATIC_DRAW); // GL_STATIC_RAW <- book says raw, but this doesn't exist.
 		
 		glBindBufferBase(GL_UNIFORM_BUFFER, uboIndex, ubo);
-		
 	}
-
-
-	/// Old INIT
-	/*
-	glGenVertexArrays(NumVAOs, VAOs);
-	glBindVertexArray(VAOs[Triangles]);
-
-	GLfloat vertices[NumVertices][2] = {
-		{ -0.90f, -0.90f }, // Triangle 1
-		{  0.85f, -0.90f },
-		{ -0.90f,  0.85f },
-		{  0.90f, -0.85f }, // Triangle 2
-		{  0.90f,  0.90f },
-		{ -0.85f,  0.90f }
-	};
-
-	glGenBuffers(NumBuffers, Buffers);
-	glBindBuffer(GL_ARRAY_BUFFER, Buffers[ArrayBuffer]);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-
-	
-
-	glVertexAttribPointer(vPosition, 2, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
-	glEnableVertexAttribArray(vPosition);
-	*/
 }
 
 void display(void) {

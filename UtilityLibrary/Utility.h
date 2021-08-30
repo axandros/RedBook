@@ -14,7 +14,7 @@ namespace Utility {
 		///</summary>
 		///<param name="filename"> The name of the file to open.  Can be a relative file path.</param>
 		/// <returns> Returns the file contents as a string. </returns>
-		static std::string LoadShader(const std::string& filename);
+		static std::string LoadShader(const std::string& filename, bool debug = false);
 
 		///<summary>
 		/// Creates a shader of type using the source code source.
@@ -30,7 +30,7 @@ namespace Utility {
 		///<param name="vertexShader">The source code for the vertex shader. </param>
 		///<param name="fragmentShader">The source code for the sfragment shader. </param>
 		/// <returns> Returns the compiled program id. </returns>
-		static int CreateShader(const std::string& vertexShader, const std::string fragmentShader);
+		static int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
 	};
 
 	class GLUtil {
